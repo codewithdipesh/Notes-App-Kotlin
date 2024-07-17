@@ -1,0 +1,69 @@
+package com.example.notesapp.presentation
+
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.notesapp.data.Note
+import com.example.notesapp.repository.NoteRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class NoteViewModel @Inject constructor(
+    private  val repository: NoteRepository
+): ViewModel() {
+
+    var title by mutableStateOf("")
+        private set
+    var description by mutableStateOf("")
+        private set
+
+
+    val allNotes:StateFlow<List<Note>> = repository.getAllNotes()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun onNoteTitleChanged(newtitle : String){
+        title = newtitle
+    }
+    fun onNoteDescriptionChanged(newdescription : String){
+        description = newdescription
+    }
+
+    fun addNote(note: Note){
+        viewModelScope.launch {
+            repository.addNote(note)
+        }
+    }
+    fun updateNote(note: Note){
+        viewModelScope.launch {
+            repository.updateNote(note)
+        }
+    }
+
+    fun deleteNote(note: Note){
+        viewModelScope.launch {
+            repository.deleteNote(note)
+        }
+    }
+
+    fun toggleNoteImportance(id: Long){
+        viewModelScope.launch {
+            repository.toggleIsImportant(id)
+        }
+    }
+
+    fun getNoteById(id: Long){
+        viewModelScope.launch {
+            repository.getNoteById(id)
+        }
+    }
+
+
+
+}

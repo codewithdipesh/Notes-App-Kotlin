@@ -20,8 +20,8 @@ abstract class NoteDao {
     @Update
     abstract suspend fun updateNote(noteEntity: Note)
 
-    @Query("update `note_table` set note_isImportant = :isImportant where id = :id")
-    abstract suspend fun updateIsImportant(id: Long , isImportant:Boolean)
+    @Query("update `note_table` set note_isImportant = NOT note_isImportant where id = :id")
+    abstract suspend fun updateIsImportant(id: Long )
 
     @Delete
     abstract suspend fun deleteNote(noteEntity: Note)
