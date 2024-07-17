@@ -69,16 +69,14 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
 
-
+    //lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
     implementation("androidx.lifecycle:lifecycle-livedata:2.8.2")
-
+    //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
-
+    //navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -92,5 +90,18 @@ dependencies {
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
     testImplementation("androidx.room:room-testing:$roomVersion")
+
+    //Hilt
+    val hiltVersion = "2.44"
+    val hiltAndroidXVersion = "1.0.0"
+
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
+    implementation("androidx.hilt:hilt-navigation-compose:$hiltAndroidXVersion")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
 }

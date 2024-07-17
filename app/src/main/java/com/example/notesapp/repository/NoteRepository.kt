@@ -1,9 +1,12 @@
-package com.example.notesapp.data
+package com.example.notesapp.repository
 
+import com.example.notesapp.data.Note
+import com.example.notesapp.data.NoteDao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
-class NoteRepository (
+class NoteRepository @Inject constructor(
     private val dao: NoteDao
 ){
     suspend fun addNote(note: Note){
