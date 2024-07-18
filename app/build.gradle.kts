@@ -4,6 +4,9 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 }
+kapt {
+    correctErrorTypes = true
+}
 
 android {
     namespace = "com.example.notesapp"
@@ -69,39 +72,35 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+     //lifecycle
+    val lifecycle_version = "2.8.3"
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version")
+    annotationProcessor("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
 
-    //lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.2")
-    implementation("androidx.lifecycle:lifecycle-livedata:2.8.2")
     //coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
     //navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-
-    implementation ("com.github.ybq:Android-SpinKit:1.4.0")
+    implementation("androidx.navigation:navigation-compose:$nav_version")
 
     //Room database
-        val roomVersion = "2.6.1"  
-    // Room components
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    testImplementation("androidx.room:room-testing:$roomVersion")
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     //Hilt
-    val hiltVersion = "2.44"
-    val hiltAndroidXVersion = "1.0.0"
-
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
-
-    implementation("androidx.hilt:hilt-navigation-compose:$hiltAndroidXVersion")
-    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
-    kaptTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation ("com.google.dagger:hilt-android:2.51.1")
+    kapt ("com.google.dagger:hilt-compiler:2.51.1")
+    androidTestImplementation  ("com.google.dagger:hilt-android-testing:2.51.1")
+    kaptAndroidTest ("com.google.dagger:hilt-compiler:2.51.1")
+    testImplementation ("com.google.dagger:hilt-android-testing:2.51.1")
 
 }
