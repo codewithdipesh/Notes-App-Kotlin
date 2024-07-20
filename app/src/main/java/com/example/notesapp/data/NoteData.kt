@@ -1,23 +1,25 @@
 package com.example.notesapp.data
 
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.notesapp.R
 import com.example.notesapp.utils.toArgbInt
 
 @Entity(tableName = "note_table")
 data class Note(
-   @PrimaryKey(autoGenerate = true)
-    val id : Long = 0L,
-   @ColumnInfo("note_title")
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
+    @ColumnInfo("note_title")
     val title:String = "",
-   @ColumnInfo("note_description")
+    @ColumnInfo("note_description")
     val description:String = "",
-   @ColumnInfo("note_isImportant")
+    @ColumnInfo("note_isImportant")
     val isImportant:Boolean = false,
     @ColumnInfo("note_color")
-    val color : Int = Color.Cyan.toArgbInt()
+    val color: Int = Color.LightGray.toArgbInt()
 )
 
 
