@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -15,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -59,7 +61,9 @@ fun AddorEditScreen(
 
     }
 
-    val containerColor by remember { derivedStateOf { viewModel.colorState.toColor() } }
+    val containerColor = remember(viewModel.colorState) {
+        viewModel.colorState.toColor()
+    }
 
     Scaffold (
         topBar = {
@@ -71,16 +75,19 @@ fun AddorEditScreen(
                 {
                     //TODO MENU BUTTON
                 },
-                backgroundColor = viewModel.colorState.toColor()
+                backgroundColor = containerColor
                 )
         },
         containerColor = containerColor
 
     ){
+//        Text(text = "Text",modifier =Modifier.padding(it))
         Surface (modifier = Modifier
             .fillMaxSize()
-            .padding(it)){
-            Column(modifier =Modifier.padding(16.dp)) {
+            .padding(it),
+            color = containerColor
+        ){
+            Column(modifier =Modifier.padding(20.dp)) {
                 NoteTextField(
                     label = "Title",
                     value = viewModel.titleState,
@@ -90,12 +97,14 @@ fun AddorEditScreen(
                     fontSize = 30.sp,
                     context = context
                 )
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(12.dp))
+                HorizontalDivider(thickness = 2.dp, color = Color.LightGray)
+                Spacer(modifier = Modifier.height(12.dp))
                 NoteTextField(
                     label = "Description",
                     value = viewModel.descriptionState,
                     onValueChanged = { viewModel.onNoteDescriptionChanged(it) },
-                    maxline = 3,
+                    maxline = 100,
                     fontWeight = FontWeight.Normal,
                     fontSize = 20.sp,
                     context = context

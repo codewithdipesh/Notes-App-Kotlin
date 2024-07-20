@@ -7,6 +7,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.notesapp.R
 import com.example.notesapp.utils.toArgbInt
+import java.util.Date
 
 @Entity(tableName = "note_table")
 data class Note(
