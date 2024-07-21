@@ -27,8 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.notesapp.R
 import com.example.notesapp.data.DummyNote
+import com.example.notesapp.data.Screen
 import com.example.notesapp.presentation.NoteViewModel
 import com.example.notesapp.presentation.home_screen.elements.NoteAppBar
 import com.example.notesapp.presentation.home_screen.elements.NoteCard
@@ -36,7 +39,8 @@ import com.example.notesapp.presentation.home_screen.elements.NoteCard
 
 @Composable
 fun HomeView(
-    viewmodel : NoteViewModel = hiltViewModel()
+    viewmodel : NoteViewModel = hiltViewModel(),
+    navController: NavController
 ){
     Scaffold(
         topBar = {
@@ -48,7 +52,8 @@ fun HomeView(
         },
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                //TODO ADD NBEW NOTE
+                 navController.navigate(Screen.AddScreen.route+"/0L")
+
             },
                 modifier = Modifier.padding(20.dp),
                 containerColor = colorResource(id = R.color.orange),
@@ -78,12 +83,14 @@ fun HomeView(
             //TODO SCROLLABLE ROW
 
             LazyColumn( ){
-                items(DummyNote.noteList){
+                items(noteList.value){
                         note->
                     NoteCard(
                         note = note)
                     {
-                        //TODO EDIT NOTE
+
+                        val id = note.id
+                        navController.navigate(Screen.AddScreen.route+"/$id")
                     }
                 }
             }
@@ -99,5 +106,5 @@ fun HomeView(
 @Preview(showBackground = true)
 @Composable
 fun HomeViewPreview(){
-    HomeView()
+//    HomeView()
 }

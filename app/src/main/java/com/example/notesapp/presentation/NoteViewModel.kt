@@ -24,7 +24,7 @@ class NoteViewModel @Inject constructor(
 
     var titleState by mutableStateOf("")
     var descriptionState by mutableStateOf("")
-    var colorState by mutableStateOf(Color.LightGray.toArgbInt())
+    var colorState by mutableStateOf(Color.Gray.toArgbInt())
     var isImportantState by mutableStateOf(false)
 
 

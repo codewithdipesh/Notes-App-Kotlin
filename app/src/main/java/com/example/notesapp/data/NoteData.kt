@@ -1,5 +1,6 @@
 package com.example.notesapp.data
 
+
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.room.ColumnInfo
@@ -20,7 +21,7 @@ data class Note(
     @ColumnInfo("note_isImportant")
     val isImportant:Boolean = false,
     @ColumnInfo("note_color")
-    val color: Int = Color.LightGray.toArgbInt()
+    val color: Int = Color.Gray.toArgbInt()
 )
 
 
