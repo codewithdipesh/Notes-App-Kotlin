@@ -40,7 +40,8 @@ fun NoteAppBar(
             MyCircularIcon(
                 icon = Icons.Default.KeyboardArrowLeft,
                 backgroundColor = colorResource(id = R.color.light_gray),
-                buttonColor = Color.Black
+                buttonColor = Color.Black,
+                onclick = onBackNavClicked
             )
         }
     }else{
@@ -48,7 +49,10 @@ fun NoteAppBar(
             MyCircularIcon(
                 icon = Icons.Default.AccountCircle,
                 backgroundColor = Color.White,
-                buttonColor = Color.DarkGray
+                buttonColor = Color.DarkGray,
+                onclick = {
+                    //TODO IMAGE CLICK
+                }
             )
         }
     }

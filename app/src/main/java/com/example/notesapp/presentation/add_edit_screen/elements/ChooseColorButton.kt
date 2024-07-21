@@ -22,14 +22,15 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun ChooseColorButton(
     color: Color,
-    onColorChanged : (Int) -> Unit = {}
+    onColorChanged : (Color) -> Unit
 ) {
     Box(modifier = Modifier
         .clip(CircleShape)
         .size(50.dp)
         .background(color)
         .clickable {
-            //TODO
+            //TODO click color
+            onColorChanged(color)
 
         }
         .border(BorderStroke(1.dp,Color.Black), CircleShape)
@@ -41,5 +42,5 @@ fun ChooseColorButton(
 @Composable
 
 fun ChooseColorButtonPreview(){
-    ChooseColorButton(color = colorResource(id = R.color.button_red))
+//    ChooseColorButton(color = colorResource(id = R.color.button_red))
 }

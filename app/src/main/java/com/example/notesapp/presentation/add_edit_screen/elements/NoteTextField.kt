@@ -42,7 +42,7 @@ fun NoteTextField(
                 style = TextStyle(
                     fontSize = fontSize,
                     fontWeight = FontWeight.Normal,
-                    color = Color.Gray // Hint color
+                    color = colorResource(id = R.color.light_text_label) // Hint color
                 ),
                 modifier = Modifier.fillMaxWidth()
             )

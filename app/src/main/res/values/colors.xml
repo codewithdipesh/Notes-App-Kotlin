@@ -11,7 +11,7 @@
     <color name="Basic_Yellow">#FEFE9F</color>
     <color name="light_gray">#D6D6D6</color>
     <color name="orange">#FC6802</color>
-    <color name="light_text_label">#9FFFFFFF</color>
+    <color name="light_text_label">#DADADA</color>
     <color name="button_yellow">#FEEB98</color>
     <color name="button_red">#FEC8C8</color>
     <color name="button_blue">#A4D7FE</color>

@@ -23,8 +23,7 @@ fun MyCircularIcon(
     backgroundColor: Color = colorResource(id = R.color.ash) ,
     buttonColor:Color = Color.White,
     onclick:()->Unit = {},
-    icon : ImageVector,
-    modifier: Modifier =Modifier
+    icon : ImageVector
 ){
     Box (modifier = Modifier
         .clip(CircleShape)

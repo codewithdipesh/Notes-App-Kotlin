@@ -38,7 +38,7 @@ class NoteViewModel @Inject constructor(
         descriptionState = newdescription
     }
 
-    fun colorStateChanged(newcolor : Int){
+    fun onColorStateChanged(newcolor : Int){
         colorState = newcolor
     }
 

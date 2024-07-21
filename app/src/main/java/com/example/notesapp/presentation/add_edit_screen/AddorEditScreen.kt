@@ -81,6 +81,7 @@ fun AddorEditScreen(
                 "",
                 {
                     //TODO BACK BUTTON
+                 navController.navigateUp()
                 },
                 {
                     //TODO MENU BUTTON
@@ -126,7 +127,10 @@ fun AddorEditScreen(
 
 
 
-            })
+            },
+                onClickColor = {
+                    viewModel.onColorStateChanged(it)
+                })
         },
         floatingActionButtonPosition = FabPosition.Center,
         containerColor = containerColor

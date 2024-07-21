@@ -29,12 +29,15 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.notesapp.R
+import com.example.notesapp.presentation.NoteViewModel
+import com.example.notesapp.utils.toArgbInt
 import com.example.notesapp.utils.toColor
 
 
 @Composable
 fun FloatingActionButtonList(
-    onClickButton:()-> Unit
+    onClickButton:()-> Unit,
+    onClickColor : (Int) -> Unit
 ){
 
         Row (
@@ -47,13 +50,21 @@ fun FloatingActionButtonList(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ){
-            ChooseColorButton(color = colorResource(id = R.color.button_blue))
+            ChooseColorButton(color = colorResource(id = R.color.button_blue)){
+                onClickColor(it.toArgbInt())
+            }
             Spacer(modifier = Modifier.width(2.dp))
-            ChooseColorButton(color = colorResource(id = R.color.button_red))
+            ChooseColorButton(color = colorResource(id = R.color.button_red)){
+                onClickColor(it.toArgbInt())
+            }
             Spacer(modifier = Modifier.width(2.dp))
-            ChooseColorButton(color = colorResource(id = R.color.button_green))
+            ChooseColorButton(color = Color.Gray){
+                onClickColor(it.toArgbInt())
+            }
             Spacer(modifier = Modifier.width(2.dp))
-            ChooseColorButton(color = colorResource(id = R.color.button_yellow))
+            ChooseColorButton(color = colorResource(id = R.color.button_yellow)){
+                onClickColor(it.toArgbInt())
+            }
             Spacer(modifier = Modifier.width(2.dp))
             IconButton(onClick = {
                 //TODO
