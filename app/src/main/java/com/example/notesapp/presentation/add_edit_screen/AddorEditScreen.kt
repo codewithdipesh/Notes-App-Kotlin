@@ -91,7 +91,7 @@ fun AddorEditScreen(
         floatingActionButton = {
             FloatingActionButtonList(onClickButton = {
                 //check input is empty or not
-                if(viewModel.titleState.isEmpty() && viewModel.descriptionState.isEmpty()){
+                if(viewModel.titleState.isEmpty() || viewModel.descriptionState.isEmpty()){
                     if(viewModel.titleState.isEmpty()){
                         snackMessage = "Title can't be empty"
                         Toast.makeText(context,snackMessage,Toast.LENGTH_SHORT).show()
