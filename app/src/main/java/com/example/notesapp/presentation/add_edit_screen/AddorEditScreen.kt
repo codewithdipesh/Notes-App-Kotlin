@@ -34,6 +34,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.notesapp.data.Note
 import com.example.notesapp.presentation.NoteViewModel
+import com.example.notesapp.presentation.add_edit_screen.elements.DropDownMenuOptions
 import com.example.notesapp.presentation.add_edit_screen.elements.FloatingActionButtonList
 import com.example.notesapp.presentation.add_edit_screen.elements.NoteTextField
 import com.example.notesapp.presentation.home_screen.elements.NoteAppBar
@@ -51,6 +52,9 @@ fun AddorEditScreen(
     val context = LocalContext.current
     var snackMessage by remember {
         mutableStateOf("")
+    }
+    var expanded by remember {
+        mutableStateOf(false)
     }
 
     LaunchedEffect(id){
@@ -84,10 +88,24 @@ fun AddorEditScreen(
                  navController.navigateUp()
                 },
                 {
-                    //TODO MENU BUTTON
+                expanded = !expanded
                 },
                 backgroundColor = containerColor
                 )
+            DropDownMenuOptions(
+                expanded = expanded,
+                onDismissRequest = {expanded = false},
+                onDelete = {
+                    //TODO CHANGE TO  DELETE BY ID
+                    viewModel.deleteNote(Note(
+                        id = id,
+                        title = viewModel.titleState.trim(),
+                        description = viewModel.descriptionState.trim(),
+                        color = viewModel.colorState,
+                        isImportant = viewModel.isImportantState
+                    )
+                    )
+                })
         },
         floatingActionButton = {
             FloatingActionButtonList(onClickButton = {
