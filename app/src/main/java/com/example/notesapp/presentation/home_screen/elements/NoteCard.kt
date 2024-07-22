@@ -44,7 +44,8 @@ fun NoteCard(note : Note,onClick:()-> Unit){
                 text = "${note.title}",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                maxLines = 2
+                maxLines = 2,
+                color = Color.Black
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(

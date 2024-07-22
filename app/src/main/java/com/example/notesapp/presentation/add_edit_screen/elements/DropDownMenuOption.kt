@@ -1,6 +1,7 @@
 package com.example.notesapp.presentation.add_edit_screen.elements
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,7 +34,7 @@ fun DropDownMenuOptions(
    DropdownMenu(
        expanded = expanded ,
        onDismissRequest = onDismissRequest,
-       modifier =modifier)
+       modifier = Modifier.background(Color.White))
    {
        DropdownMenuItem(
            text = {
