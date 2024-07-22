@@ -63,12 +63,19 @@ fun AddorEditScreen(
     LaunchedEffect(id){
         if(id != 0L){
             viewModel.getNoteById(id).collect{note->
-                viewModel.titleState = note.title
-                viewModel.descriptionState = note.description
-                viewModel.colorState = note.color
-                viewModel.isImportantState = note.isImportant
+                //thats check is helpfful when deleting any note and it gives error beacuse it tries to access null note
+                if(note != null){
+                    viewModel.titleState = note.title
+                    viewModel.descriptionState = note.description
+                    viewModel.colorState = note.color
+                    viewModel.isImportantState = note.isImportant
+                }else{
+                    navController.navigateUp()
+                }
+
             }
-        }else{
+        }
+        else{
             viewModel.titleState = ""
             viewModel.descriptionState = ""
             viewModel.colorState = Color.Gray.toArgbInt()
@@ -167,6 +174,8 @@ fun AddorEditScreen(
                             isImportant = viewModel.isImportantState
                         )
                         )
+
+                        navController.navigateUp()
                     }
 
                 )
@@ -201,4 +210,3 @@ fun AddorEditScreen(
 
 
 }
-
