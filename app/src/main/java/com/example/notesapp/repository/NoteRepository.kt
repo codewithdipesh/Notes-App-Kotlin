@@ -19,11 +19,7 @@ class NoteRepository @Inject constructor(
        dao.updateNote(note)
     }
     fun getNoteById(id:Long):Flow<Note> = dao.getNoteById(id)
-    suspend fun toggleIsImportant(id:Long){
-//        val note = dao.getNoteById(id).first()//for collect the emitted value from flow
-//        dao.updateIsImportant(id,!note.isImportant )
-        dao.updateIsImportant(id)
-    }
+
 
     suspend fun deleteNote(note: Note){
         dao.deleteNote(note)

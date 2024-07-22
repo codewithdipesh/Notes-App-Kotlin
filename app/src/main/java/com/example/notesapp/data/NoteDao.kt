@@ -14,14 +14,12 @@ abstract class NoteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun addNote(noteEntity : Note)
 
-    @Query("select * from `note_table`")
+    //getting the important first
+    @Query("select * from `note_table` order by note_isImportant desc,id asc")
     abstract fun getAllNotes():Flow<List<Note>>
 
     @Update
     abstract suspend fun updateNote(noteEntity: Note)
-
-    @Query("update `note_table` set note_isImportant = NOT note_isImportant where id = :id")
-    abstract suspend fun updateIsImportant(id: Long )
 
     @Delete
     abstract suspend fun deleteNote(noteEntity: Note)

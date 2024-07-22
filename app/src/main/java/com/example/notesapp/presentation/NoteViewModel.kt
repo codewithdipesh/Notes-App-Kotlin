@@ -42,7 +42,7 @@ class NoteViewModel @Inject constructor(
         colorState = newcolor
     }
 
-    fun isImportantStateChanged(newstate : Boolean){
+    fun onImportantStateChanged(newstate : Boolean){
         isImportantState = newstate
     }
 
@@ -63,11 +63,6 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    fun toggleNoteImportance(id: Long){
-        viewModelScope.launch {
-            repository.toggleIsImportant(id)
-        }
-    }
 
     fun getNoteById(id: Long):Flow<Note>{
      return repository.getNoteById(id)

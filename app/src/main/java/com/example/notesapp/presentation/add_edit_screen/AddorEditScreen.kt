@@ -39,6 +39,7 @@ import com.example.notesapp.data.Note
 import com.example.notesapp.presentation.NoteViewModel
 import com.example.notesapp.presentation.add_edit_screen.elements.DropDownMenuOptions
 import com.example.notesapp.presentation.add_edit_screen.elements.FloatingActionButtonList
+import com.example.notesapp.presentation.add_edit_screen.elements.LoveIcon
 import com.example.notesapp.presentation.add_edit_screen.elements.NoteTextField
 import com.example.notesapp.presentation.home_screen.elements.NoteAppBar
 import com.example.notesapp.utils.toArgbInt
@@ -174,14 +175,25 @@ fun AddorEditScreen(
                             isImportant = viewModel.isImportantState
                         )
                         )
-
+                        expanded = false
                         navController.navigateUp()
                     }
 
                 )
             }
 
-            Column(modifier =Modifier.padding(20.dp)) {
+            Column(modifier =Modifier.padding(start = 20.dp, bottom = 20.dp, end = 20.dp, top = 10.dp)) {
+                Box(
+                    modifier = Modifier.fillMaxWidth().padding(2.dp),
+                    contentAlignment = Alignment.TopEnd
+
+                )
+                {
+                    LoveIcon(isImportant = viewModel.isImportantState){
+                        //change the state
+                        viewModel.onImportantStateChanged(!viewModel.isImportantState)
+                    }
+                }
                 NoteTextField(
                     label = "Title",
                     value = viewModel.titleState,
