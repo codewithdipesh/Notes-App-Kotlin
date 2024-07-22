@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
@@ -23,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -81,31 +84,17 @@ fun AddorEditScreen(
 
     Scaffold (
         topBar = {
-            NoteAppBar(
-                "",
-                {
-                    //TODO BACK BUTTON
-                 navController.navigateUp()
-                },
-                {
-                expanded = !expanded
-                },
-                backgroundColor = containerColor
+                NoteAppBar(
+                    "",
+                    {
+                        navController.navigateUp()
+                    },
+                    {
+                        expanded = !expanded
+                    },
+                    backgroundColor = containerColor
                 )
-            DropDownMenuOptions(
-                expanded = expanded,
-                onDismissRequest = {expanded = false},
-                onDelete = {
-                    //TODO CHANGE TO  DELETE BY ID
-                    viewModel.deleteNote(Note(
-                        id = id,
-                        title = viewModel.titleState.trim(),
-                        description = viewModel.descriptionState.trim(),
-                        color = viewModel.colorState,
-                        isImportant = viewModel.isImportantState
-                    )
-                    )
-                })
+
         },
         floatingActionButton = {
             FloatingActionButtonList(onClickButton = {
@@ -160,6 +149,29 @@ fun AddorEditScreen(
             .padding(it),
             color = containerColor
         ){
+            Box(modifier = Modifier
+                .fillMaxSize() //TODO FIX MENU POSITION
+                .padding(end = 16.dp, top = 16.dp, start = 250.dp),
+                contentAlignment = Alignment.TopEnd
+                ){
+                DropDownMenuOptions(
+                    expanded = expanded,
+                    onDismissRequest = {expanded = false},
+                    onDelete = {
+                        //TODO CHANGE TO  DELETE BY ID
+                        viewModel.deleteNote(Note(
+                            id = id,
+                            title = viewModel.titleState.trim(),
+                            description = viewModel.descriptionState.trim(),
+                            color = viewModel.colorState,
+                            isImportant = viewModel.isImportantState
+                        )
+                        )
+                    }
+
+                )
+            }
+
             Column(modifier =Modifier.padding(20.dp)) {
                 NoteTextField(
                     label = "Title",
@@ -189,3 +201,4 @@ fun AddorEditScreen(
 
 
 }
+
