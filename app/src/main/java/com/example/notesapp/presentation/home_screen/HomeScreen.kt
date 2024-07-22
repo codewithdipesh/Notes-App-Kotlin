@@ -1,5 +1,6 @@
 package com.example.notesapp.presentation.home_screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,10 +15,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -42,6 +45,7 @@ fun HomeView(
     viewmodel : NoteViewModel = hiltViewModel(),
     navController: NavController
 ){
+
     Scaffold(
         topBar = {
             NoteAppBar(
@@ -67,7 +71,6 @@ fun HomeView(
     ) {
 
         val noteList = viewmodel.allNotes.collectAsState(initial = listOf())
-
         //Heading
         Column(modifier = Modifier
             .fillMaxSize()
@@ -82,18 +85,32 @@ fun HomeView(
             )
             //TODO SCROLLABLE ROW
 
-            LazyColumn( ){
-                items(noteList.value){
-                        note->
-                    NoteCard(
-                        note = note)
-                    {
+            //showing the notelist
 
-                        val id = note.id
-                        navController.navigate(Screen.AddScreen.route+"/$id")
+                //if there is no note
+                if(noteList.value.isEmpty()){
+                    Text(
+                        text = "Make your First Note",
+                        color = colorResource(id = R.color.light_text_label),
+                        fontSize = 20.sp,
+                        modifier = Modifier.align(Alignment.CenterHorizontally)
+                    )
+                }
+
+
+                LazyColumn( ){
+                    items(noteList.value){
+                            note->
+                        NoteCard(
+                            note = note)
+                        {
+
+                            val id = note.id
+                            navController.navigate(Screen.AddScreen.route+"/$id")
+                        }
                     }
                 }
-            }
+
         }
 
     }
