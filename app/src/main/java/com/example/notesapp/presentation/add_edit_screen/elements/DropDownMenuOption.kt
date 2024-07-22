@@ -26,6 +26,7 @@ import com.example.notesapp.presentation.NoteViewModel
 fun DropDownMenuOptions(
     expanded : Boolean,
     onDismissRequest :() -> Unit,
+    onShare:()->Unit,
     onDelete:()->Unit,
     modifier: Modifier = Modifier
 ){
@@ -39,7 +40,7 @@ fun DropDownMenuOptions(
                   DropDownOption(text = "Share Note" , icon = Icons.Default.Share)
                   },
            onClick = {
-              //TODO SHARE NOTE
+              onShare()
            }
        )
 

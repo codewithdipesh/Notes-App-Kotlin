@@ -41,6 +41,7 @@ import com.example.notesapp.presentation.add_edit_screen.elements.DropDownMenuOp
 import com.example.notesapp.presentation.add_edit_screen.elements.FloatingActionButtonList
 import com.example.notesapp.presentation.add_edit_screen.elements.LoveIcon
 import com.example.notesapp.presentation.add_edit_screen.elements.NoteTextField
+import com.example.notesapp.presentation.add_edit_screen.elements.ShareNote
 import com.example.notesapp.presentation.home_screen.elements.NoteAppBar
 import com.example.notesapp.utils.toArgbInt
 import com.example.notesapp.utils.toColor
@@ -177,6 +178,14 @@ fun AddorEditScreen(
                         )
                         expanded = false
                         navController.navigateUp()
+                    },
+                    onShare = {
+                        ShareNote(
+                            context = context,
+                            title = viewModel.titleState,
+                            description = viewModel.descriptionState
+                        )
+                        expanded = false
                     }
 
                 )
