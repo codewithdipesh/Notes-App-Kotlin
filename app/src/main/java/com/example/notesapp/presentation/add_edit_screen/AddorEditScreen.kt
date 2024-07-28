@@ -1,6 +1,7 @@
 package com.example.notesapp.presentation.add_edit_screen
 
 import android.widget.Toast
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -51,7 +52,8 @@ import kotlinx.coroutines.flow.collect
 fun AddorEditScreen(
     id:Long,
     viewModel: NoteViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
+    sharedText : String?
 ){
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -79,7 +81,7 @@ fun AddorEditScreen(
         }
         else{
             viewModel.titleState = ""
-            viewModel.descriptionState = ""
+            viewModel.descriptionState = sharedText ?: ""
             viewModel.colorState = Color.Gray.toArgbInt()
             viewModel.isImportantState = false
 
@@ -91,12 +93,20 @@ fun AddorEditScreen(
         viewModel.colorState.toColor()
     }
 
+    val animatedBackgroundColor by animateColorAsState(
+        targetValue = containerColor,
+        label = "Background Color Animation"
+    )
+
+
     Scaffold (
         topBar = {
                 NoteAppBar(
                     "",
                     {
                         navController.navigateUp()
+                        //also clear the state to new fresh state
+                        viewModel.isImportantState = false
                     },
                     {
                         expanded = !expanded
@@ -149,7 +159,7 @@ fun AddorEditScreen(
                 })
         },
         floatingActionButtonPosition = FabPosition.Center,
-        containerColor = containerColor
+        containerColor = animatedBackgroundColor
 
     ){
 //        Text(text = "Text",modifier =Modifier.padding(it))
